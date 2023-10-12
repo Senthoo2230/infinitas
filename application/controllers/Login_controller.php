@@ -2,10 +2,13 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
         
 class Login_controller extends CI_Controller {
-
+    public function __construct()
+    {
+        parent::__construct();
+    }
 public function index()
 {
-    echo 4;
+    $this->load->view('login/login');
 }
         
 }
