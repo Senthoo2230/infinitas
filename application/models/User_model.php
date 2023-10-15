@@ -18,7 +18,16 @@ class User_model extends CI_Model
 
         // Check if the user was inserted successfully
         return $this->db->affected_rows() > 0;
-    }                       
+    }   
+    
+    public function getHashedPasswordFromDB($username) {
+        $query = $this->db->select('password')->from('users')->where('username', $username)->get();
+        $result = $query->row();
+        if ($result) {
+            return $result->password;
+        }
+        return false;
+    }
                         
 }
 

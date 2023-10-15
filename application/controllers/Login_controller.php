@@ -25,7 +25,7 @@ public function register()
 public function signup()
 {
     // Set validation rules
-    $this->form_validation->set_rules('username', 'Username', 'required');
+    $this->form_validation->set_rules('username', 'Username', 'required|is_unique[users.username]');
     $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
     $this->form_validation->set_rules('confirm_pwd', 'Repeat Password', 'required|matches[password]');
 
@@ -51,7 +51,36 @@ public function signup()
             redirect('register');
         }
     }
-}       
+} 
+
+
+
+    public function signin(){
+        
+        $this->form_validation->set_rules('username', 'Username', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+                $this->index();
+        }
+        else
+        {
+            $username = $this->input->post('username');
+            $password = $this->input->post('password');
+            // Retrieve hashed password from the database based on the username
+            $hashed_password_from_db = $this->User_model->getHashedPasswordFromDB($username);
+            if (password_verify($password, $hashed_password_from_db)) {
+                // Passwords match, user is authenticated, proceed with login logic
+                // Set user session or redirect to dashboard, etc.
+                echo "Dashboard is loading";
+            } else {
+                // Passwords don't match, show error message or redirect back to login page
+                $this->session->set_flashdata('error', 'Invalid username or password!');
+                redirect('login');
+            }
+        }
+    }
 }
         
 /* End of file  Login_controller.php */
