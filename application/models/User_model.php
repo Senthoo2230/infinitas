@@ -28,6 +28,19 @@ class User_model extends CI_Model
         }
         return false;
     }
+
+    public function get_user_id($username) {
+        $this->db->select('user_id'); // Assuming 'id' is the column name for user ID in your database table
+        $this->db->where('username', $username);
+        $query = $this->db->get('users'); // 'users' is the name of your database table
+
+        if ($query->num_rows() > 0) {
+            $row = $query->row();
+            return $row->id;
+        } else {
+            return null; // User not found
+        }
+    }
                         
 }
 

@@ -61,3 +61,7 @@ $route['signin']['post'] = 'Login_controller/signin';
 
 //Dashboard
 $route['dashboard'] = 'Dashboard_controller/index';
+
+// Customer
+$route['customer_signup'] = 'Customer_controller/signup';
+$route['customer_register']['post'] = 'Customer_controller/customer_register';
