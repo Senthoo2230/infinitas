@@ -9,8 +9,10 @@ class Dashboard_controller extends CI_Controller {
     }
 
     public function index()
-    {
+    {   
+        $this->load->view('head');
         $this->load->view('dashboard/dashboard');
+        $this->load->view('footer');
     }
 }
 

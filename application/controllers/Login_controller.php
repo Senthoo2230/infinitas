@@ -72,8 +72,7 @@ public function signup()
             $hashed_password_from_db = $this->User_model->getHashedPasswordFromDB($username);
             if (password_verify($password, $hashed_password_from_db)) {
                 // Passwords match, user is authenticated, proceed with login logic
-                // Set user session or redirect to dashboard, etc.
-                echo "Dashboard is loading";
+                redirect('dashboard');
             } else {
                 // Passwords don't match, show error message or redirect back to login page
                 $this->session->set_flashdata('error', 'Invalid username or password!');
