@@ -104,6 +104,23 @@ border-bottom-right-radius: 15px;
                     </div>
                   </div>
 
+                  <div class="row">
+                    <div class="col-md-12 mb-1 pb-2">
+                      <div class="form-outline">
+                        <label for="">Referal ID</label>
+                        <input type="text" id="form3Examplev2" class="form-control form-control-lg" name="ref_id" value="<?php echo set_value('ref_id'); ?>"/>
+
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12 mb-1 pb-2">
+                      If your are a member, <a href="customer_login">login here</a>
+                    </div>
+                  </div>
+
                   
 
                 </div>
@@ -124,7 +141,7 @@ border-bottom-right-radius: 15px;
                   <div class="mb-1 pb-2">
                   <label for="">Password</label>
                     <div class="form-outline form-white">
-                      <input type="text" id="form3Examplea3" class="form-control form-control-lg" name="password" value="<?php echo set_value('password'); ?>" />
+                      <input type="password" id="form3Examplea3" class="form-control form-control-lg" name="password" value="<?php echo set_value('password'); ?>" />
                       <div style="font-size: 12px;" class="text-primary"><?php echo form_error('password'); ?></div>
                     </div>
                   </div>
@@ -133,7 +150,7 @@ border-bottom-right-radius: 15px;
                   
                     <div class="form-outline form-white">
                       <label for="">Confirm Password</label>
-                      <input type="text" id="form3Examplea3" class="form-control form-control-lg" name="confirm_pwd" value="<?php echo set_value('confirm_pwd'); ?>"/>
+                      <input type="password" id="form3Examplea3" class="form-control form-control-lg" name="confirm_pwd" value="<?php echo set_value('confirm_pwd'); ?>"/>
                       <div style="font-size: 12px;" class="text-primary"><?php echo form_error('confirm_pwd'); ?></div>
                     </div>
                   </div>
