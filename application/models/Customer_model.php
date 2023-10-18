@@ -27,10 +27,17 @@ class Customer_model extends CI_Model
 
         if ($query->num_rows() > 0) {
             $row = $query->row();
-            return $row->id;
+            return $row->customer_id;
         } else {
             return null; // User not found
         }
+    }
+
+    public function customer_data($customer_id){
+        $this->db->where('customer_id', $customer_id);
+        $query = $this->db->get('customers');
+        $row = $query->first_row();
+        return $row;
     }
                         
 }

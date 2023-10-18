@@ -18,6 +18,9 @@ class Customer_controller extends CI_Controller {
 
     public function login()
     {
+        if ($this->session->userdata('customer_logged')) {
+            redirect('customer_dashboard');
+        } 
         $this->load->view('head');
         $this->load->view('customer/login');
         $this->load->view('footer');
@@ -25,9 +28,13 @@ class Customer_controller extends CI_Controller {
 
     public function dashboard()
     {   
-        $this->load->view('head');
-        $this->load->view('customer/dashboard');
-        $this->load->view('footer');
+        if ($this->session->userdata('customer_logged')) {
+            $customer_id = $this->session->userdata('customer_id');
+        } 
+        $data['customer_data'] = $this->Customer_model->customer_data($customer_id);
+        $this->load->view('head',$data);
+        $this->load->view('customer/dashboard',$data);
+        $this->load->view('footer',$data);
     }
 
     public function customer_register(){
@@ -117,7 +124,7 @@ class Customer_controller extends CI_Controller {
                 // Set session data
                 $data = array(
                     'customer_id' => $customer_id,
-                    'logged' => true,
+                    'customer_logged' => true,
                 );
                 $this->session->set_userdata($data);
                 redirect('customer_dashboard');
@@ -127,6 +134,11 @@ class Customer_controller extends CI_Controller {
                 redirect('customer_login');
             }
         }
+    }
+
+    public function customer_logout() {
+        $this->session->sess_destroy(); // Destroy all session data
+        redirect('customer_login'); // Redirect to the login page or any other desired page
     }
 }
 

@@ -87,6 +87,7 @@ public function signup()
             }
         }
     }
+
 }
         
 /* End of file  Login_controller.php */

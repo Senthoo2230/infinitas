@@ -46,7 +46,7 @@
                   </form>
                 </div>
               </div>
-              <div class="card col-md-5 text-white bg-primary py-5">
+              <div class="card col-md-5 text-white bg-primary py-5" style="background-color:#F99417;">
                 <div class="card-body text-center">
                   <div>
                     <h2>About Us</h2>
