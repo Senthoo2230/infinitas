@@ -23,6 +23,13 @@ class Customer_controller extends CI_Controller {
         $this->load->view('footer');
     }
 
+    public function dashboard()
+    {   
+        $this->load->view('head');
+        $this->load->view('customer/dashboard');
+        $this->load->view('footer');
+    }
+
     public function customer_register(){
         // Set validation rules
         $this->form_validation->set_rules('fname', 'Firstname', 'required');
