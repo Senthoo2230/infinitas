@@ -54,49 +54,51 @@ border-bottom-right-radius: 15px;
                   <h3 class="fw-normal mb-5" style="color: #F99417;">General Infomation</h3>
 
                   <div class="row">
-                    <div class="col-md-6 mb-3 pb-2">
-
+                    
+                    <div class="col-md-6 mb-1 pb-2">
+                    
                       <div class="form-outline">
-                        <input type="text" id="form3Examplev2" class="form-control form-control-lg" />
-                        <label class="form-label" for="form3Examplev2" name="fname">First name</label>
+                        <label for="">Firstname</label>
+                        <input placeholder="Jhon" type="text" id="form3Examplev2" name="fname" class="form-control form-control-lg" value="<?php echo set_value('fname'); ?>"/>
+                        <span style="font-size: 12px;" class="text-danger"><?php echo form_error('fname'); ?></span>
                       </div>
 
                     </div>
-                    <div class="col-md-6 mb-3 pb-2">
-
+                    <div class="col-md-6 mb-1 pb-2">
                       <div class="form-outline">
-                        <input type="text" id="form3Examplev3" class="form-control form-control-lg" />
-                        <label class="form-label" for="form3Examplev3" name="lname">Last name</label>
-                      </div>
-
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-6 mb-3 pb-2">
-
-                      <div class="form-outline">
-                        <input type="text" id="form3Examplev2" class="form-control form-control-lg" />
-                        <label class="form-label" for="form3Examplev2" name="mobile">Mobile</label>
-                      </div>
-
-                    </div>
-                    <div class="col-md-6 mb-3 pb-2">
-
-                      <div class="form-outline">
-                        <input type="email" id="form3Examplev3" class="form-control form-control-lg" />
-                        <label class="form-label" for="form3Examplev3" name="email">Email</label>
+                        <label for="">Lastname</label>
+                        <input placeholder="Mark" type="text" id="form3Examplev3" class="form-control form-control-lg" name="lname" value="<?php echo set_value('lname'); ?>"/>
+                        <span style="font-size: 12px;" class="text-danger"><?php echo form_error('lname'); ?></span>
                       </div>
 
                     </div>
                   </div>
 
                   <div class="row">
-                    <div class="col-md-12 mb-3 pb-2">
-
+                    <div class="col-md-6 mb-1 pb-2">
                       <div class="form-outline">
-                        <input type="text" id="form3Examplev2" class="form-control form-control-lg" />
-                        <label class="form-label" for="form3Examplev2">Address</label>
+                        <label for="Mobile No">Mobile No</label>
+                        <input placeholder="0778434368" type="text" id="form3Examplev2" class="form-control form-control-lg" name="mobile" value="<?php echo set_value('mobile'); ?>" />
+                        <span style="font-size: 12px;" class="text-danger"><?php echo form_error('mobile'); ?></span>
+                      </div>
+
+                    </div>
+                    <div class="col-md-6 mb-1 pb-2">
+                      <div class="form-outline">
+                      <label for="">Email</label>
+                        <input placeholder="mark@gmail.com" type="email" id="form3Examplev3" class="form-control form-control-lg" name="email" value="<?php echo set_value('email'); ?>"/>
+                        <span style="font-size: 12px;" class="text-danger"><?php echo form_error('email'); ?></span>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12 mb-1 pb-2">
+                      <div class="form-outline">
+                        <label for="">Address</label>
+                        <input type="text" id="form3Examplev2" class="form-control form-control-lg" name="address" value="<?php echo set_value('address'); ?>"/>
+
                       </div>
 
                     </div>
@@ -111,24 +113,28 @@ border-bottom-right-radius: 15px;
                 <div class="p-5">
                   <h3 class="fw-normal mb-5">Login Details</h3>
 
-                  <div class="mb-3 pb-2">
+                  <div class="mb-1 pb-2">
+                  <label for="">Username</label>
                     <div class="form-outline form-white">
-                      <input type="text" id="form3Examplea2" class="form-control form-control-lg" />
-                      <label class="form-label" for="form3Examplea2" name="username">Username</label>
+                      <input type="text" id="form3Examplea2" class="form-control form-control-lg" name="username" value="<?php echo set_value('username'); ?>"/>
+                      <div style="font-size: 12px;" class="text-primary"><?php echo form_error('username'); ?></div>
                     </div>
                   </div>
 
-                  <div class="mb-3 pb-2">
+                  <div class="mb-1 pb-2">
+                  <label for="">Password</label>
                     <div class="form-outline form-white">
-                      <input type="text" id="form3Examplea3" class="form-control form-control-lg" />
-                      <label class="form-label" for="form3Examplea3" name="password">Password</label>
+                      <input type="text" id="form3Examplea3" class="form-control form-control-lg" name="password" value="<?php echo set_value('password'); ?>" />
+                      <div style="font-size: 12px;" class="text-primary"><?php echo form_error('password'); ?></div>
                     </div>
                   </div>
 
-                  <div class="mb-3 pb-2">
+                  <div class="mb-1 pb-2">
+                  
                     <div class="form-outline form-white">
-                      <input type="text" id="form3Examplea3" class="form-control form-control-lg" />
-                      <label class="form-label" for="form3Examplea3" name="confirm_password">Confirm Password</label>
+                      <label for="">Confirm Password</label>
+                      <input type="text" id="form3Examplea3" class="form-control form-control-lg" name="confirm_pwd" value="<?php echo set_value('confirm_pwd'); ?>"/>
+                      <div style="font-size: 12px;" class="text-primary"><?php echo form_error('confirm_pwd'); ?></div>
                     </div>
                   </div>
                   
