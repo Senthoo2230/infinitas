@@ -6,13 +6,15 @@ class Dashboard_controller extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('Customer_model');
     }
 
     public function index()
     {   
-        $this->load->view('head');
-        $this->load->view('dashboard/dashboard');
-        $this->load->view('footer');
+        $data['customers'] = $this->Customer_model->customers();
+        $this->load->view('head',$data);
+        $this->load->view('dashboard/dashboard',$data);
+        $this->load->view('footer',$data);
     }
 }
 

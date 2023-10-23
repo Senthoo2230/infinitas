@@ -104,7 +104,7 @@ class Customer_controller extends CI_Controller {
     }
 
     public function signin(){
-        
+        $currentTimestamp = date('Y-m-d H:i:s');
         $this->form_validation->set_rules('username', 'Username', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
 
@@ -126,6 +126,14 @@ class Customer_controller extends CI_Controller {
                     'customer_id' => $customer_id,
                     'customer_logged' => true,
                 );
+                // Create log
+                $log_data = array(
+                    'customer_id' => $customer_id,
+                    'log_time' => $currentTimestamp,
+                    'type' => 1
+                );
+                $this->Customer_model->create_log($log_data);
+
                 $this->session->set_userdata($data);
                 redirect('customer_dashboard');
             } else {
@@ -137,6 +145,14 @@ class Customer_controller extends CI_Controller {
     }
 
     public function customer_logout() {
+        $currentTimestamp = date('Y-m-d H:i:s');
+        // Create log
+        $log_data = array(
+            'customer_id' => $this->session->customer_id,
+            'log_time' => $currentTimestamp,
+            'type' => 0
+        );
+        $this->Customer_model->create_log($log_data);
         $this->session->sess_destroy(); // Destroy all session data
         redirect('customer_login'); // Redirect to the login page or any other desired page
     }
