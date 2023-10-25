@@ -63,6 +63,13 @@ class Customer_model extends CI_Model
         $result = $query->result();
         return $result;
     }
+
+    public function all_customers(){
+        $this->db->order_by('created_at', 'DESC');
+        $query = $this->db->get('customers');
+        $result = $query->result();
+        return $result;
+    }
                         
 }
 

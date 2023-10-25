@@ -156,6 +156,13 @@ class Customer_controller extends CI_Controller {
         $this->session->sess_destroy(); // Destroy all session data
         redirect('customer_login'); // Redirect to the login page or any other desired page
     }
+
+    public function all_customers(){
+        $data['customers'] = $this->Customer_model->all_customers();
+        $this->load->view('head',$data);
+        $this->load->view('customer/all_customers',$data);
+        $this->load->view('footer',$data);
+    }
 }
 
 /* End of file Customer_controller.php and path \application\controllers\Customer_controller.php */
