@@ -70,4 +70,7 @@ $route['customer_dashboard'] = 'Customer_controller/dashboard';
 $route['customer_signin']['post'] = 'Customer_controller/signin';
 $route['customer_register']['post'] = 'Customer_controller/customer_register';
 
+$route['approval/submit']['post'] = 'Customer_controller/approval_submit';
+
 $route['customers'] = 'Customer_controller/all_customers';
+$route['customer/approval/(:num)'] = 'Customer_controller/approval/$1';

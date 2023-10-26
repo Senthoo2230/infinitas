@@ -70,6 +70,33 @@ class Customer_model extends CI_Model
         $result = $query->result();
         return $result;
     }
+
+    public function packages(){
+        $this->db->order_by('package_id', 'ASC');
+        $query = $this->db->get('packages');
+        $result = $query->result();
+        return $result;
+    }
+
+    public function approve_customer($data) {
+        
+        // Insert the user data into the database
+        $this->db->insert('customer_packages', $data);
+        // Check if the user was inserted successfully
+        return $this->db->affected_rows() > 0;
+    }
+
+    public function update_data($cus_id, $new_data) {
+        $this->db->where('customer_id', $cus_id); // Assuming 'id' is the column to identify the row to update
+        $this->db->update('customers', $new_data);
+    
+        // Check if the update was successful
+        if ($this->db->affected_rows() > 0) {
+            return true; // Update successful
+        } else {
+            return false; // Update failed
+        }
+    }
                         
 }
 

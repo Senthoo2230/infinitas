@@ -145,23 +145,75 @@ class Customer_controller extends CI_Controller {
     }
 
     public function customer_logout() {
-        $currentTimestamp = date('Y-m-d H:i:s');
-        // Create log
-        $log_data = array(
-            'customer_id' => $this->session->customer_id,
-            'log_time' => $currentTimestamp,
-            'type' => 0
-        );
-        $this->Customer_model->create_log($log_data);
+        // $currentTimestamp = date('Y-m-d H:i:s');
+        // // Create log
+        // $log_data = array(
+        //     'customer_id' => $this->session->customer_id,
+        //     'log_time' => $currentTimestamp,
+        //     'type' => 0
+        // );
+        // $this->Customer_model->create_log($log_data);
         $this->session->sess_destroy(); // Destroy all session data
         redirect('customer_login'); // Redirect to the login page or any other desired page
     }
 
     public function all_customers(){
+        $data['main'] = "Customer";
+        $data['sub'] = "All";
         $data['customers'] = $this->Customer_model->all_customers();
         $this->load->view('head',$data);
+        $this->load->view('header',$data);
         $this->load->view('customer/all_customers',$data);
         $this->load->view('footer',$data);
+    }
+
+    public function approval($customer_id){
+        $data['customer_id'] = $customer_id;
+        $data['main'] = "Customer";
+        $data['sub'] = "Approval";
+
+        $data['packages'] = $this->Customer_model->packages();
+        $this->load->view('head',$data);
+        $this->load->view('header',$data);
+        $this->load->view('customer/approval',$data);
+        $this->load->view('footer',$data);
+    }
+
+    public function approval_submit(){
+        $currentTimestamp = date('Y-m-d H:i:s');
+        $customer_id = $this->input->post('customer_id');
+        $this->form_validation->set_rules('package', 'Package', 'required');
+        $this->form_validation->set_rules('interest', 'Interest', 'required|numeric');
+        $this->form_validation->set_rules('start_date', 'Start date', 'required');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+                $this->approval($customer_id);
+        }
+        else{
+            $package = $this->input->post('package');
+            $interest = $this->input->post('interest');
+            $start_date = $this->input->post('start_date');
+
+            $approval_data = array(
+                'package_id' => $package,
+                'rate' => $interest,
+                'start_date' => $start_date,
+                'customer_id' => $customer_id,
+                'created_at' => $currentTimestamp
+            );
+
+            if ($this->Customer_model->approve_customer($approval_data)) {
+                //Update customer tbl 
+                $new_data = array(
+                    'approved' => 1, // Specify the column and its new value
+                    // Add more columns as needed
+                );
+                $this->Customer_model->update_data($customer_id, $new_data);
+
+                redirect('customers');
+            }
+        }
     }
 }
 
