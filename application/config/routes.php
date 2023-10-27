@@ -73,4 +73,5 @@ $route['customer_register']['post'] = 'Customer_controller/customer_register';
 $route['approval/submit']['post'] = 'Customer_controller/approval_submit';
 
 $route['customers'] = 'Customer_controller/all_customers';
+$route['customer/report'] = 'Customer_controller/report';
 $route['customer/approval/(:num)'] = 'Customer_controller/approval/$1';

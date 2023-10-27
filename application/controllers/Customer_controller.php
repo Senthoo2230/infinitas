@@ -32,7 +32,10 @@ class Customer_controller extends CI_Controller {
             $customer_id = $this->session->userdata('customer_id');
         } 
         $data['customer_data'] = $this->Customer_model->customer_data($customer_id);
+        $data['main'] = "Customer";
+        $data['sub'] = "Dashboard";
         $this->load->view('head',$data);
+        $this->load->view('customer/header',$data);
         $this->load->view('customer/dashboard',$data);
         $this->load->view('footer',$data);
     }
@@ -176,6 +179,29 @@ class Customer_controller extends CI_Controller {
         $this->load->view('head',$data);
         $this->load->view('header',$data);
         $this->load->view('customer/approval',$data);
+        $this->load->view('footer',$data);
+    }
+
+    public function report(){
+        $data['main'] = "Customer";
+        $data['sub'] = "Report";
+
+        $customer_id = $this->session->customer_id;
+        $data['customer_id'] = $customer_id;
+
+        $customer_package = $this->Customer_model->customer_package($customer_id);
+        $data['customer_package'] = $customer_package;
+
+        $package_id = $customer_package->package_id;
+        $data['package_id'] = $package_id;
+
+        $package_data = $this->Customer_model->package_data($package_id);
+        $data['package_data'] = $package_data;
+
+        //$data['packages'] = $this->Customer_model->packages();
+        $this->load->view('head',$data);
+        $this->load->view('customer/header',$data);
+        $this->load->view('customer/report',$data);
         $this->load->view('footer',$data);
     }
 

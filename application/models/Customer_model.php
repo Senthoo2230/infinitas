@@ -57,6 +57,20 @@ class Customer_model extends CI_Model
         return $row;
     }
 
+    public function customer_package($customer_id){
+        $this->db->where('customer_id', $customer_id);
+        $query = $this->db->get('customer_packages');
+        $row = $query->first_row();
+        return $row;
+    }
+
+    public function package_data($package_id){
+        $this->db->where('package_id', $package_id);
+        $query = $this->db->get('packages');
+        $row = $query->first_row();
+        return $row;
+    }
+
     public function customers(){
         $this->db->order_by('created_at', 'DESC');
         $query = $this->db->get('customers');
