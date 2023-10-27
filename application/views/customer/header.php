@@ -20,6 +20,13 @@
               <use xlink:href="<?php echo base_url(); ?>assets/vendors/@coreui/icons/svg/free.svg#cil-drop"></use>
             </svg> Report</a>
         </li>
+
+        <li class="nav-item"><a class="nav-link" href="<?php echo base_url('customer/history'); ?>">
+            <svg class="nav-icon">
+              <use xlink:href="<?php echo base_url(); ?>assets/vendors/@coreui/icons/svg/free.svg#cil-drop"></use>
+            </svg> Hisory</a>
+        </li>
+
       </ul>
       <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>
     </div>

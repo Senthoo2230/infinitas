@@ -71,6 +71,7 @@ class Customer_model extends CI_Model
         return $row;
     }
 
+
     public function customers(){
         $this->db->order_by('created_at', 'DESC');
         $query = $this->db->get('customers');

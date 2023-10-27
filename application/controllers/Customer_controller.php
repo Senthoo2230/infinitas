@@ -205,6 +205,29 @@ class Customer_controller extends CI_Controller {
         $this->load->view('footer',$data);
     }
 
+    public function history(){
+        $data['main'] = "Customer";
+        $data['sub'] = "History";
+
+        $customer_id = $this->session->customer_id;
+        $data['customer_id'] = $customer_id;
+
+        $customer_package = $this->Customer_model->customer_package($customer_id);
+        $data['customer_package'] = $customer_package;
+
+        $package_id = $customer_package->package_id;
+        $data['package_id'] = $package_id;
+
+        $package_data = $this->Customer_model->package_data($package_id);
+        $data['package_data'] = $package_data;
+
+
+        $this->load->view('head',$data);
+        $this->load->view('customer/header',$data);
+        $this->load->view('customer/history',$data);
+        $this->load->view('footer',$data);
+    }
+
     public function approval_submit(){
         $currentTimestamp = date('Y-m-d H:i:s');
         $customer_id = $this->input->post('customer_id');
