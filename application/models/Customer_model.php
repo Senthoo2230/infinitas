@@ -71,10 +71,24 @@ class Customer_model extends CI_Model
         return $row;
     }
 
+    public function refferal_count($customer_id){
+        $this->db->where('ref_id', $customer_id);
+        $query = $this->db->get('customers');
+        return $query->num_rows();
+    }
+
 
     public function customers(){
         $this->db->order_by('created_at', 'DESC');
         $query = $this->db->get('customers');
+        $result = $query->result();
+        return $result;
+    }
+
+    public function cus_history($customer_id){
+        $this->db->where('customer_id', $customer_id);
+        $this->db->order_by('history_date', 'DESC');
+        $query = $this->db->get('history');
         $result = $query->result();
         return $result;
     }

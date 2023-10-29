@@ -1,4 +1,7 @@
-
+<?php
+  $CI =& get_instance();
+  $CI->load->model('Admin_model');
+?>
 <div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
       <div class="sidebar-brand d-none d-md-flex">
         <svg class="sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">
@@ -26,7 +29,7 @@
               <use xlink:href="<?php echo base_url(); ?>assets/vendors/@coreui/icons/svg/free.svg#cil-pencil"></use>
             </svg> Request
             <?php
-                $req_count = $this->Admin_model->req_count(); 
+                $req_count = $CI->Admin_model->req_count(); 
                 if ($req_count > 0) {
                   ?>
                     <span class="badge badge-sm bg-info ms-auto"><?php echo $req_count; ?></span>

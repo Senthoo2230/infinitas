@@ -10,9 +10,10 @@ public function __construct() {
 
 public function index()
 {
-    $this->load->view('head');
-    $this->load->view('login/login');
-    $this->load->view('footer');
+    $data['title'] = "Admin Login";
+    $this->load->view('head',$data);
+    $this->load->view('login/login',$data);
+    $this->load->view('footer',$data);
 }
 
 public function register()

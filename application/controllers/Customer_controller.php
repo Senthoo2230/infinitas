@@ -11,9 +11,10 @@ class Customer_controller extends CI_Controller {
 
     public function signup()
     {
-        $this->load->view('head');
-        $this->load->view('customer/register');
-        $this->load->view('footer');
+        $data['title'] = "Customer Signup";
+        $this->load->view('head',$data);
+        $this->load->view('customer/register',$data);
+        $this->load->view('footer',$data);
     }
 
     public function login()
@@ -21,9 +22,10 @@ class Customer_controller extends CI_Controller {
         if ($this->session->userdata('customer_logged')) {
             redirect('customer_dashboard');
         } 
-        $this->load->view('head');
-        $this->load->view('customer/login');
-        $this->load->view('footer');
+        $data['title'] = "Customer Login";
+        $this->load->view('head',$data);
+        $this->load->view('customer/login',$data);
+        $this->load->view('footer',$data);
     }
 
     public function dashboard()
@@ -31,7 +33,15 @@ class Customer_controller extends CI_Controller {
         if ($this->session->userdata('customer_logged')) {
             $customer_id = $this->session->userdata('customer_id');
         } 
-        $data['customer_data'] = $this->Customer_model->customer_data($customer_id);
+        $data['customer_data'] = $customer_data = $this->Customer_model->customer_data($customer_id);
+        $package_id = $this->Customer_model->customer_package($customer_id)->package_id;
+        $package_data = $this->Customer_model->package_data($package_id);
+
+        $data['package_data'] = $package_data;
+
+        $data['ref_count'] = $this->Customer_model->refferal_count($customer_id);
+
+        $data['title'] = "Dashboard";
         $data['main'] = "Customer";
         $data['sub'] = "Dashboard";
         $this->load->view('head',$data);
@@ -124,21 +134,26 @@ class Customer_controller extends CI_Controller {
             if (password_verify($password, $hashed_password_from_db)) {
                 // Passwords match, user is authenticated, proceed with login logic
                 $customer_id = $this->Customer_model->get_customer_id($username);
-                // Set session data
-                $data = array(
-                    'customer_id' => $customer_id,
-                    'customer_logged' => true,
-                );
-                // Create log
-                $log_data = array(
-                    'customer_id' => $customer_id,
-                    'log_time' => $currentTimestamp,
-                    'type' => 1
-                );
-                $this->Customer_model->create_log($log_data);
 
-                $this->session->set_userdata($data);
-                redirect('customer_dashboard');
+                $cus_data = $this->Customer_model->customer_data($customer_id);
+                $approved = $cus_data->approved;
+
+                if ($approved == 1) {
+                    // Set session data
+                    $data = array(
+                        'customer_id' => $customer_id,
+                        'customer_logged' => true,
+                    );
+
+                    $this->session->set_userdata($data);
+                    redirect('customer_dashboard');
+                    }
+                else{
+                    // Passwords don't match, show error message or redirect back to login page
+                    $this->session->set_flashdata('error', 'You are not get aprroval!');
+                    redirect('customer_login');
+                }
+                
             } else {
                 // Passwords don't match, show error message or redirect back to login page
                 $this->session->set_flashdata('error', 'Invalid username or password!');
@@ -161,6 +176,7 @@ class Customer_controller extends CI_Controller {
     }
 
     public function all_customers(){
+        $data['title'] = "Customers";
         $data['main'] = "Customer";
         $data['sub'] = "All";
         $data['customers'] = $this->Customer_model->all_customers();
@@ -171,6 +187,7 @@ class Customer_controller extends CI_Controller {
     }
 
     public function approval($customer_id){
+        $data['title'] = "Approval";
         $data['customer_id'] = $customer_id;
         $data['main'] = "Customer";
         $data['sub'] = "Approval";
@@ -183,6 +200,7 @@ class Customer_controller extends CI_Controller {
     }
 
     public function report(){
+        $data['title'] = "Report";
         $data['main'] = "Customer";
         $data['sub'] = "Report";
 
@@ -206,6 +224,7 @@ class Customer_controller extends CI_Controller {
     }
 
     public function history(){
+        $data['title'] = "History";
         $data['main'] = "Customer";
         $data['sub'] = "History";
 
@@ -221,6 +240,9 @@ class Customer_controller extends CI_Controller {
         $package_data = $this->Customer_model->package_data($package_id);
         $data['package_data'] = $package_data;
 
+        $cus_history = $this->Customer_model->cus_history($customer_id);
+        $data['cus_history'] = $cus_history;
+
 
         $this->load->view('head',$data);
         $this->load->view('customer/header',$data);
@@ -229,6 +251,7 @@ class Customer_controller extends CI_Controller {
     }
 
     public function withdrawal(){
+        $data['title'] = "Withdrawal";
         $data['main'] = "Customer";
         $data['sub'] = "Withdrawal";
 
@@ -272,6 +295,37 @@ class Customer_controller extends CI_Controller {
                     // Add more columns as needed
                 );
                 $this->Customer_model->update_data($customer_id, $new_data);
+
+                $pack_id = $this->Customer_model->customer_package($customer_id)->package_id;
+
+                $amount = $this->Customer_model->package_data($pack_id)->amount;
+
+                $bonus = $this->Customer_model->package_data($pack_id)->ref_bonus;
+
+                $ref_id = $this->Customer_model->customer_data($customer_id)->ref_id;
+
+                if ($ref_id > 0) {
+                    // History
+                    $ref_history_data = array(
+                        'transaction' => 3,
+                        'customer_id' => $ref_id,
+                        'history_date' => $currentTimestamp,
+                        'amount' => $bonus,
+                        'created_at' => $currentTimestamp,
+                    );
+        
+                    $this->Customer_model->insert_history($ref_history_data);
+                }
+                // History
+                $history_data = array(
+                    'transaction' => 0,
+                    'customer_id' => $customer_id,
+                    'history_date' => $currentTimestamp,
+                    'amount' => $amount,
+                    'created_at' => $currentTimestamp,
+                );
+    
+                $this->Customer_model->insert_history($history_data);
 
                 redirect('customers');
             }

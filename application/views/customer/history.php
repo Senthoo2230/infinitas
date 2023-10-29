@@ -18,14 +18,37 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td><?php echo $customer_package->start_date; ?></td>
-                            <td>Deposit</td>
-                            <td><?php echo "Rs.".$package_data->amount; ?></td>
-                            <td>Approved</td>
-                        </tr>
-                        
+                        <?php
+                            $i = 1;
+                            foreach ($cus_history as $his) {
+                                ?>
+                                    <tr>
+                                        <th scope="row"><?php echo $i; ?></th>
+                                        <td><?php echo $his->history_date; ?></td>
+                                        <td>
+                                            <?php 
+                                                $type = $his->transaction;
+                                                if ($type == 0) {
+                                                    echo "Deposit";
+                                                }
+                                                if ($type == 1) {
+                                                    echo "Withdrawal Req";
+                                                }
+                                                if ($type == 2) {
+                                                    echo "Withdrawal";
+                                                }
+                                                if ($type == 3) {
+                                                    echo "Ref Bonus";
+                                                }
+                                            ?>
+                                        </td>
+                                        <td><?php echo "Rs.".$his->amount; ?></td>
+                                        <td>Approved</td>
+                                    </tr>
+                                <?php
+                                $i++;
+                            }
+                        ?>
                     </tbody>
                 </table>
               </div>

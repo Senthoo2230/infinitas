@@ -74,6 +74,7 @@ $route['approval/submit']['post'] = 'Customer_controller/approval_submit';
 
 $route['customers'] = 'Customer_controller/all_customers';
 $route['customer/report'] = 'Customer_controller/report';
+$route['customer/history'] = 'Customer_controller/history';
 $route['customer/withdrawal'] = 'Customer_controller/withdrawal';
 
 

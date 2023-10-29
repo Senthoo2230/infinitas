@@ -6,7 +6,7 @@
               <div class="card mb-4 text-white bg-primary">
                 <div class="card-body pb-0 d-flex justify-content-between align-items-start">
                   <div>
-                    <div class="fs-4 fw-semibold">Gold Pro</div>
+                    <div class="fs-4 fw-semibold"><?php echo $package_data->package; ?></div>
                     <div>PACKAGE</div>
                   </div>
                   <div class="dropdown">
@@ -28,7 +28,7 @@
               <div class="card mb-4 text-white bg-info">
                 <div class="card-body pb-0 d-flex justify-content-between align-items-start">
                   <div>
-                    <div class="fs-4 fw-semibold">12</div>
+                    <div class="fs-4 fw-semibold"><?php echo $ref_count; ?></div>
                       <div>REFERRALS</div>
                   </div>
                   <div class="dropdown">
