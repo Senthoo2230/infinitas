@@ -337,10 +337,12 @@ class Customer_controller extends CI_Controller {
         $customer_id = $this->session->customer_id;
         
         $amount = $this->input->post('amount');
+        $wal_id = $this->input->post('wal_id');
 
         $req_data = array(
             'amount' => $amount,
             'customer_id' => $customer_id,
+            'wal_id' => $wal_id,
             'request_date' => $currentTimestamp,
             'status' => 0,
         );

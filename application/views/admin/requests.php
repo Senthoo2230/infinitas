@@ -13,7 +13,7 @@
                             <th scope="col">#</th>
                             <th scope="col">Customer id</th>
                             <th scope="col">Customer Name</th>
-                            <th scope="col">Mobile</th>
+                            <th scope="col">Wallet ID</th>
                             <th scope="col">Amount</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -34,7 +34,7 @@
                                         </th>
                                         <th>
                                             <?php 
-                                                echo $cus_data->mobile; 
+                                                echo $req->wal_id; 
                                             ?>
                                         </th>
                                         <th>

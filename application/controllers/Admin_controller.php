@@ -12,12 +12,37 @@ class Admin_controller extends CI_Controller {
 
     public function requests()
     {
+        $data['title'] = "Requests";
         $data['requests'] = $this->Admin_model->requests();
         $data['main'] = "Dashboard";
         $data['sub'] = "Requests";
         $this->load->view('head',$data);
         $this->load->view('header',$data);
         $this->load->view('admin/requests',$data);
+        $this->load->view('footer',$data);
+    }
+
+    public function all_packages()
+    {
+        $data['title'] = "Packages";
+        $data['packages'] = $this->Admin_model->all_packages();
+        $data['main'] = "Dashboard";
+        $data['sub'] = "Packages";
+        $this->load->view('head',$data);
+        $this->load->view('header',$data);
+        $this->load->view('admin/packages',$data);
+        $this->load->view('footer',$data);
+    }
+
+    public function all_customers()
+    {
+        $data['title'] = "Customers";
+        $data['customers'] = $this->Admin_model->all_customers();
+        $data['main'] = "Dashboard";
+        $data['sub'] = "Customers";
+        $this->load->view('head',$data);
+        $this->load->view('header',$data);
+        $this->load->view('admin/customers',$data);
         $this->load->view('footer',$data);
     }
 

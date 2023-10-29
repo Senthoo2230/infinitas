@@ -84,3 +84,6 @@ $route['withdrawal/request']['post'] = 'Customer_controller/withdrawal_request';
 $route['requests'] = 'Admin_controller/requests';
 $route['requests/approve/(:num)'] = 'Admin_controller/req_approve/$1';
 $route['requests/cancel/(:num)'] = 'Admin_controller/req_cancel/$1';
+
+$route['package/all'] = 'Admin_controller/all_packages';
+$route['customer/all'] = 'Admin_controller/all_customers';

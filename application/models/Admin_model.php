@@ -9,7 +9,22 @@ class Admin_model extends CI_Model
         $query = $this->db->get('withdrawal');
         $result = $query->result();
         return $result;
-    }      
+    }
+
+    public function all_packages(){
+        $this->db->order_by('package_id', 'ASC');
+        $query = $this->db->get('packages');
+        $result = $query->result();
+        return $result;
+    }
+    
+    public function all_customers(){
+        $this->db->where('approved', 1);
+        $this->db->order_by('updated_at', 'DESC');
+        $query = $this->db->get('customers');
+        $result = $query->result();
+        return $result;
+    }
     
     public function with_data($with_id){
         $this->db->where('withdrawal_id', $with_id);

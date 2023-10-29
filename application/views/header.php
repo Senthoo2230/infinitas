@@ -32,20 +32,20 @@
                 $req_count = $CI->Admin_model->req_count(); 
                 if ($req_count > 0) {
                   ?>
-                    <span class="badge badge-sm bg-info ms-auto"><?php echo $req_count; ?></span>
+                    <span class="badge badge-sm bg-warning ms-auto"><?php echo $req_count; ?></span>
                   <?php
                 }
             ?>
           </a>
         </li>
-        <li class="nav-item"><a class="nav-link" href="assets/typography.html">
+        <li class="nav-item"><a class="nav-link" href="<?php echo base_url('package/all'); ?>">
             <svg class="nav-icon">
               <use xlink:href="<?php echo base_url(); ?>assets/vendors/@coreui/icons/svg/free.svg#cil-pencil"></use>
-            </svg> Transaction</a></li>
-        <li class="nav-item"><a class="nav-link" href="assets/typography.html">
+            </svg>Manage Package</a></li>
+        <li class="nav-item"><a class="nav-link" href="<?php echo base_url('customer/all'); ?>">
             <svg class="nav-icon">
               <use xlink:href="<?php echo base_url(); ?>assets/vendors/@coreui/icons/svg/free.svg#cil-pencil"></use>
-            </svg> Settings</a></li>
+            </svg>Manage Customer</a></li>
             
       </ul>
       <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>
