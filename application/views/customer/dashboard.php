@@ -69,6 +69,14 @@
             </div>
             <!-- /.col-->
           </div>
+
+          <div>
+              <?php if ($this->session->flashdata('message')): ?>
+                  <div class="alert alert-success">
+                      <?php echo $this->session->flashdata('message'); ?>
+                  </div>
+              <?php endif; ?>
+          </div>
           
           <div class="row">
             <div class="card">

@@ -74,6 +74,12 @@ $route['approval/submit']['post'] = 'Customer_controller/approval_submit';
 
 $route['customers'] = 'Customer_controller/all_customers';
 $route['customer/report'] = 'Customer_controller/report';
-$route['customer/history'] = 'Customer_controller/history';
+$route['customer/withdrawal'] = 'Customer_controller/withdrawal';
+
 
 $route['customer/approval/(:num)'] = 'Customer_controller/approval/$1';
+$route['withdrawal/request']['post'] = 'Customer_controller/withdrawal_request';
+
+$route['requests'] = 'Admin_controller/requests';
+$route['requests/approve/(:num)'] = 'Admin_controller/req_approve/$1';
+$route['requests/cancel/(:num)'] = 'Admin_controller/req_cancel/$1';

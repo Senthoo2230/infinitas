@@ -228,6 +228,19 @@ class Customer_controller extends CI_Controller {
         $this->load->view('footer',$data);
     }
 
+    public function withdrawal(){
+        $data['main'] = "Customer";
+        $data['sub'] = "Withdrawal";
+
+        $customer_id = $this->session->customer_id;
+        $data['customer_id'] = $customer_id;
+
+        $this->load->view('head',$data);
+        $this->load->view('customer/header',$data);
+        $this->load->view('customer/withdrawal',$data);
+        $this->load->view('footer',$data);
+    }
+
     public function approval_submit(){
         $currentTimestamp = date('Y-m-d H:i:s');
         $customer_id = $this->input->post('customer_id');
@@ -262,6 +275,35 @@ class Customer_controller extends CI_Controller {
 
                 redirect('customers');
             }
+        }
+    }
+
+    public function withdrawal_request(){
+        $currentTimestamp = date('Y-m-d H:i:s');
+        $customer_id = $this->session->customer_id;
+        
+        $amount = $this->input->post('amount');
+
+        $req_data = array(
+            'amount' => $amount,
+            'customer_id' => $customer_id,
+            'request_date' => $currentTimestamp,
+            'status' => 0,
+        );
+
+        if ($this->Customer_model->insert_withdrawal($req_data)) {
+            $history_data = array(
+                'transaction' => 1,
+                'customer_id' => $customer_id,
+                'history_date' => $currentTimestamp,
+                'amount' => $amount,
+                'created_at' => $currentTimestamp,
+            );
+
+            $this->Customer_model->insert_history($history_data);
+
+            $this->session->set_flashdata('message', 'Your withdrawal request has been sent!');
+            redirect('customer_dashboard');
         }
     }
 }

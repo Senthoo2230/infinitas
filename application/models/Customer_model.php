@@ -98,7 +98,21 @@ class Customer_model extends CI_Model
         // Insert the user data into the database
         $this->db->insert('customer_packages', $data);
         // Check if the user was inserted successfully
-        return $this->db->affected_rows() > 0;
+        return $this->db->affected_rows();
+    }
+
+    public function insert_withdrawal($data){
+        // Insert the user data into the database
+        $this->db->insert('withdrawal', $data);
+        // Check if the user was inserted successfully
+        return $this->db->affected_rows();
+    }
+
+    public function insert_history($data){
+        // Insert the user data into the database
+        $this->db->insert('history', $data);
+        // Check if the user was inserted successfully
+        return $this->db->affected_rows();
     }
 
     public function update_data($cus_id, $new_data) {
